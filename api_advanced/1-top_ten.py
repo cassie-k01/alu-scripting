@@ -6,8 +6,6 @@ import requests
 
 
 def top_ten(subreddit):
-    """Return number of subscribers if @subreddit is valid subreddit.
-    if not return 0."""
 
     headers = {'User-Agent': 'CassieBot/1.0'}
     subreddit_url = "https://reddit.com/r/{}.json".format(subreddit)

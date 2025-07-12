@@ -1,23 +1,22 @@
 #!/usr/bin/python3
-"""
-Prints the titles of the first 10 hot posts from a given subreddit
-"""
+""" Get the titles of the first 10 hot posts for a given subreddit."""
 import requests
 
 
 def top_ten(subreddit):
-   
-    headers = {'User-Agent': 'CassieBot/1.0'}
-    subreddit_url = "https://reddit.com/r/{}/hot.json".format(subreddit)
+
+    headers = {'User-Agent': 'MyAPI/0.0.1'}
+    subreddit_url = "https://reddit.com/r/{}.json".format(subreddit)
     response = requests.get(subreddit_url, headers=headers)
 
     if response.status_code == 200:
         json_data = response.json()
-        posts = json_data.get('data', {}).get('children', [])
-        if posts:
-            for i in range(min(10, len(posts))):
-                print(posts[i].get('data', {}).get('title'))
-        else:
-            print("OK")
+        for i in range(10):
+            print(
+                json_data.get('data')
+                .get('children')[i]
+                .get('data')
+                .get('title')
+            )
     else:
-        print("OK")
+        print(None)

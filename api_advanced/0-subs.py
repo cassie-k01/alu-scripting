@@ -4,6 +4,7 @@ Return the number of subscribers for a given subreddit.
 """
 import requests
 
+
 def number_of_subscribers(subreddit):
     """Return the number of subscribers """
     url = "https://www.reddit.com/r/{}/about.json" \

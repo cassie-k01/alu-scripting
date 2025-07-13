@@ -4,9 +4,9 @@ import requests
 
 
 def top_ten(subreddit):
-    headers = {'User-Agent': 'python:subreddit.topten:v1.0 (educational use by Cassie)'}
+    headers = {'User-Agent': 'CassieBot/1.0'}
     url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
-    response = requests.get(url, headers=headers,allow_redirects=True)
+    response = requests.get(url, headers=headers, allow_redirects=True)
     print("Status: {}".format(response.status_code))
 
     if response.status_code == 200:

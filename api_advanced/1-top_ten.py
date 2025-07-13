@@ -2,18 +2,17 @@
 """ Get the titles of the first 10 hot posts from a subreddit."""
 import requests
 
+
 def top_ten(subreddit):
-    """"top ten"""
-    url = "https://www.reddit.com/r/{}/hot.json?limit=10" \
-        .format(subreddit)
+    headers = {'User-Agent': 'python:subreddit.topten:v1.0 (educational use by Cassie)'}
+    url = "https://www.reddit.com/r/{}/hot.json?limit=10".format(subreddit)
+    response = requests.get(url, headers=headers,allow_redirects=True)
+    print("Status: {}".format(response.status_code))
 
-    res = requests.get(url,
-                       headers={
-                           'User-Agent': 'UserAgent/1.0'})
-
-    if res.status_code != 200:
-        print(None)
+    if response.status_code == 200:
+        json_data = response.json()
+        posts = json_data.get('data', {}).get('children', [])
+        for post in posts[:10]:
+            print(post.get('data', {}).get('title'))
     else:
-        json_response = res.json()
-        posts = json_response.get('data').get('children')
-        [print(post.get('data').get('title')) for post in posts]
+        print(None)
